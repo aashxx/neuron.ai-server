@@ -43,3 +43,22 @@ export const fetchAllContent = async (userId: UserIdType) => {
         }
     }
 }
+
+export const deleteContent = async (contentId: string, userId: UserIdType) => {
+    try {
+        const content = await Content.findById(contentId);
+        if(!content) return { error: "Document does not exist" };
+        if(content.userId?.toString() !== userId) return { error: "Unauthorized" };
+
+        await Content.findByIdAndDelete(contentId);
+        return {
+            success: true,
+            message: "Content deleted successfully"
+        }
+    } catch (error) {
+        return {
+            success: false,
+            message: "Internal server error"
+        }
+    }
+} 
