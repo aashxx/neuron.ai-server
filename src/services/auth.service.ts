@@ -1,4 +1,4 @@
-import jwt, { JwtPayload } from 'jsonwebtoken';
+import jwt from 'jsonwebtoken';
 import bcrypt from 'bcryptjs';
 import { z } from "zod";
 import User from "../schemas/user";
@@ -32,7 +32,10 @@ export const createNewUser = async (credentials: z.infer<typeof signUpSchema>) =
             token
         };
     } catch (error) {
-        throw new Error(error instanceof Error ? error.message : "Internal server error");
+        return {
+            success: false,
+            message: "Internal server error"
+        }
     }
 }
 
@@ -60,7 +63,10 @@ export const loginUser = async (credentials:  z.infer<typeof loginSchema>) => {
             token
         };
     } catch (error) {
-        throw new Error(error instanceof Error ? error.message : "Internal server error");
+        return {
+            success: false,
+            message: "Internal server error"
+        }
     }
 }
 
@@ -70,6 +76,9 @@ export const fetchUserData = async (userId: UserIdType) => {
         if (!userId) return;
         return user;
     } catch (error) {
-        throw new Error(error instanceof Error ? error.message : "Internal server error");
+        return {
+            success: false,
+            message: "Internal server error"
+        }
     }
 }

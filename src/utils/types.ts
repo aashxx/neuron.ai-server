@@ -5,6 +5,4 @@ export interface AuthenticatedRequest extends Request {
     user?: string | JwtPayload
 }
 
-export interface UserIdType {
-    userId: string | JwtPayload | undefined
-}
+export type UserIdType = string | JwtPayload | undefined;
