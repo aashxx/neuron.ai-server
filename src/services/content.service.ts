@@ -28,3 +28,18 @@ export const addContent = async (content: z.infer<typeof contentSchema>, userId:
         }
     }
 }
+
+export const fetchAllContent = async (userId: UserIdType) => {
+    try {
+        const snapshot = await Content.find({ userId });
+        return {
+            success: true,
+            docs: snapshot
+        }
+    } catch (error) {
+        return {
+            success: false,
+            message: "Internal server error"
+        }
+    }
+}
