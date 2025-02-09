@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import { getErrorMessage } from "../utils/error";
 import { AuthenticatedRequest } from "../utils/types";
-import { addContent, deleteContent, fetchAllContent } from "../services/content.service";
+import { addContent, deleteContent, fetchAllContent, updateContent } from "../services/content.service";
 
 export const createContent = async (req: Request, res: Response) => {
     try {
@@ -18,6 +18,16 @@ export const getAllContent = async (req: Request, res: Response) => {
         const userId = (req as AuthenticatedRequest).user;
         const content = await fetchAllContent(userId);
         res.status(200).send(content);
+    } catch (error) {
+        res.status(400).send(getErrorMessage(error));
+    }
+}
+
+export const updatedExistingContent = async (req: Request, res: Response) => {
+    try {
+        const userId = (req as AuthenticatedRequest).user;
+        const updation = await updateContent(req.body, req.params.id, userId);
+        res.status(200).send(updation);
     } catch (error) {
         res.status(400).send(getErrorMessage(error));
     }
