@@ -4,6 +4,7 @@ import cors from "cors";
 import dotenv from "dotenv";
 import authRouter from "./routes/auth.route";
 import contentRouter from "./routes/content.route";
+import shareRouter from "./routes/share.route";
 dotenv.config();
 
 const app: Application = express();
@@ -16,6 +17,7 @@ app.use(cors());
 
 app.use("/api/auth", authRouter);
 app.use("/api/content", contentRouter);
+app.use("/api/share", shareRouter);
 
 app.listen(PORT, () => {
     console.log(`Server listening at PORT: ${PORT}`)
