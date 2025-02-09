@@ -1,6 +1,6 @@
 import { z } from "zod"
 import { UserIdType } from "../utils/types"
-import Content from "../schemas/content";
+import Content from "../schemas/content.schema";
 
 const addContentSchema = z.object({
     title: z.string(),

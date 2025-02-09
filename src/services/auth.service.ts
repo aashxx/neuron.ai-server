@@ -1,7 +1,7 @@
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcryptjs';
 import { z } from "zod";
-import User from "../schemas/user";
+import User from "../schemas/user.schema";
 import { UserIdType } from '../utils/types';
 
 const JWT_SECRET = process.env.JWT_SECRET || "secretish@1230";
